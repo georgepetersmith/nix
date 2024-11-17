@@ -1,5 +1,4 @@
 {
-  secrets,
     pkgs,
     username,
     nix-index-database,
@@ -60,7 +59,6 @@ unstable-packages = with pkgs.unstable; [
 
       sessionVariables.EDITOR = "nvim";
       sessionVariables.SHELL = "/etc/profiles/per-user/${username}/bin/bash";
-      sessionVariables.GH_TOKEN = "${secrets.github_token}";
     };
 
     home.packages =
@@ -110,9 +108,6 @@ unstable-packages = with pkgs.unstable; [
         userName = "George Smith";
         extraConfig = {
           url = {
-            "https://oauth2:${secrets.github_token}@github.com" = {
-              insteadOf = "https://github.com";
-            };
           };
           push = {
             default = "current";
