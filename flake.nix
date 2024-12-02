@@ -13,6 +13,8 @@
   inputs.nix-index-database.url = "github:Mic92/nix-index-database";
   inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+  inputs.roslyn-lsp.url = "path:/home/nixos/nix/roslyn-lsp";
+
   outputs = inputs:
     with inputs; let
 
@@ -43,7 +45,7 @@
       argDefaults = {
         inherit inputs self nix-index-database;
         channels = {
-          inherit nixpkgs nixpkgs-unstable;
+          inherit nixpkgs nixpkgs-unstable nixpkgs-george;
         };
       };
 
@@ -69,12 +71,18 @@
     in {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
-      nixosConfigurations.nixos = mkNixosConfiguration {
+      nixosConfigurations.nixos-wsl = mkNixosConfiguration {
         hostname = "nixos-wsl";
         username = "nixos";
         modules = [
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
+          ./podman.nix
+          ({ pkgs, ... }: {
+            environment.systemPackages = [ 
+              roslyn-lsp.packages.x86_64-linux.roslynLanguageServer 
+            ];
+          })
         ];
       };
     };

@@ -18,7 +18,6 @@
     shell = pkgs.bash;
     extraGroups = [
       "wheel"
-      "docker"
     ];
   };
 
@@ -37,14 +36,6 @@
     wslConf.network.generateHosts = false;
     defaultUser = username;
     startMenuLaunchers = true;
-
-    docker-desktop.enable = false;
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-    autoPrune.enable = true;
   };
 
   systemd.user = {

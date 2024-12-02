@@ -4,37 +4,40 @@
     nix-index-database,
     ...
 }: let
-unstable-packages = with pkgs.unstable; [
-  bottom
-  coreutils
-  curl
-  du-dust
-  fd
-  findutils
-  fx
-  git-crypt
-  htop
-  jq
-  killall
-  procs
-  ripgrep
-  sd
-  tmux
-  tree
-  unzip
-  neovim
-  wget
-  zip
-  cargo-cache
-  cargo-expand
-  cargo
-  rustc
-  rust-analyzer
-  dotnet-sdk_8
-  nodejs_20
-  go
-  lazygit
-  lazydocker
+  unstable-packages = with pkgs.unstable; [
+    bottom
+    coreutils
+    curl
+    du-dust
+    fd
+    findutils
+    fx
+    git-crypt
+    htop
+    jq
+    killall
+    procs
+    ripgrep
+    sd
+    tmux
+    tree
+    unzip
+    neovim
+    wget
+    zip
+    lazygit
+    lazydocker
+    lazysql
+    nodejs_20
+    podman
+    rust-analyzer
+    typescript-language-server
+    bash-language-server
+    yaml-language-server
+    tailwindcss-language-server
+    nodePackages_latest.vscode-json-languageserver
+    astro-language-server
+    marksman
   ];
 
   stable-packages = with pkgs; [
@@ -127,6 +130,7 @@ unstable-packages = with pkgs.unstable; [
         enable = true;
         shellAliases = {
           gc = "nix-collect-garbage --delete-old";
+          rb = "sudo nixos-rebuild switch --flake ~/nix/";
           pbcopy = "/mnt/c/Windows/System32/clip.exe";
           pbpaste = "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -command 'Get-Clipboard'";
           explorer = "/mnt/c/Windows/explorer.exe";

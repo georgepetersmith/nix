@@ -39,6 +39,9 @@ vim.opt.showmode = false
 vim.opt.belloff = 'all'
 vim.cmd('filetype plugin on')
 
+vim.cmd("colorscheme retrobox")
+vim.o.background = 'dark'
+
 local has = function(x)
   return vim.fn.has(x) == 1
 end
@@ -55,6 +58,7 @@ end
 
 vim.keymap.set('n', '<leader>w', '<C-w>')
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('n', '<C-k><C-w>', '<cmd>%bd<cr>')
 
 vim.filetype.add({
   extension = {

@@ -5,17 +5,6 @@ return {
     { 'nvim-lua/plenary.nvim' },
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' }
   },
-  opts = {
-    defaults = {
-      path_display = { 'smart' }
-    },
-    pickers = {
-      find_files = {
-        theme = "dropdown",
-        previewer = false
-      }
-    }
-  },
   keys = {
     { '<leader>f', '<cmd>Telescope find_files<cr>' },
     { '<leader>/', '<cmd>Telescope live_grep<cr>' },
@@ -30,6 +19,24 @@ return {
     { '<leader>d', '<cmd>Telescope lsp_document_diagnostics<cr>' }
   },
   config = function()
-    require('telescope').load_extension('fzf')
+    local telescope = require 'telescope'
+
+    telescope.setup({
+      defaults = {
+        path_display = { 'smart' }
+      },
+      pickers = {
+        find_files = {
+          theme = "dropdown",
+          previewer = false
+        },
+        buffers = {
+          theme = "dropdown",
+          previewer = false
+        }
+      }
+    })
+
+    telescope.load_extension('fzf')
   end
 }
