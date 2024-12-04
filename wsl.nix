@@ -21,13 +21,7 @@
     ];
   };
 
-  home-manager.users.${username} = {
-    imports = [
-      ./home.nix
-    ];
-  };
-
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 
   wsl = {
     enable = true;
@@ -75,7 +69,7 @@
       "/nix/var/nix/profiles/per-user/root/channels"
     ];
 
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''experimental-features = nix-command flakes'';
 
     gc = {
