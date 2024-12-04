@@ -1,0 +1,8 @@
+shell = "/etc/profiles/per-user/george/bin/bash"
+
+[font]
+normal = { family = "JetBrainsMono NF", style = "Regular" }
+
+[window]
+decorations = "Buttonless"
+dynamic_padding = true

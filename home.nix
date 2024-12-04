@@ -38,6 +38,7 @@
     nodePackages_latest.vscode-json-languageserver
     astro-language-server
     marksman
+    nerd-fonts.jetbrains-mono
   ];
 
   stable-packages = with pkgs; [
@@ -58,7 +59,6 @@
 
     home = {
       username = "${username}";
-      homeDirectory = "/home/${username}";
 
       sessionVariables.EDITOR = "nvim";
       sessionVariables.SHELL = "/etc/profiles/per-user/${username}/bin/bash";
@@ -77,11 +77,14 @@
       eza = {
         enable = true;
         git = true;
-        icons = true;
+        icons = "auto";
         enableBashIntegration = true;
       };
 
-      starship.enable = true;
+      starship = {
+        enable = true;
+        enableBashIntegration = true;
+      };
 
       fzf.enable = true;
       fzf.enableBashIntegration = true;

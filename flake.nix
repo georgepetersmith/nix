@@ -1,10 +1,10 @@
 {
   description = "NixOS configuration";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
   inputs.nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-  inputs.home-manager.url = "github:nix-community/home-manager/release-24.05";
+  inputs.home-manager.url = "github:nix-community/home-manager/release-24.11";
   inputs.home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
   inputs.nixos-wsl.url = "github:nix-community/NixOS-WSL";
@@ -13,7 +13,26 @@
   inputs.nix-index-database.url = "github:Mic92/nix-index-database";
   inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-  inputs.roslyn-lsp.url = "path:/home/nixos/nix/roslyn-lsp";
+  inputs.roslyn-lsp.url = "path:/Users/george/nix/roslyn-lsp";
+
+  inputs.nix-darwin.url = "github:LnL7/nix-darwin";
+  inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+  inputs.nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
+  # Optional: Declarative tap management
+  inputs.homebrew-core = {
+    url = "github:homebrew/homebrew-core";
+    flake = false;
+  };
+  inputs.homebrew-cask = {
+    url = "github:homebrew/homebrew-cask";
+    flake = false;
+  };
+  inputs.homebrew-bundle = {
+    url = "github:homebrew/homebrew-bundle";
+    flake = false;
+  };
 
   outputs = inputs:
     with inputs; let
@@ -45,7 +64,7 @@
       argDefaults = {
         inherit inputs self nix-index-database;
         channels = {
-          inherit nixpkgs nixpkgs-unstable nixpkgs-george;
+          inherit nixpkgs nixpkgs-unstable;
         };
       };
 
@@ -64,7 +83,33 @@
           modules =
             [
               (configurationDefaults specialArgs)
-              home-manager.nixosModules.home-manager
+              home-manager.nixosModules.home-manager {
+                home-manager.users.${username} = import ./home.nix;
+                users.users.${username}.home = "/home/${username}";
+              }
+            ]
+            ++ modules;
+        };
+
+      mkDarwinConfiguration = {
+        system ? "aarch64-darwin",
+        hostname,
+        username,
+        args ? {},
+        modules,
+      }: let
+        specialArgs = argDefaults // {inherit hostname username;} // args;
+      in
+        nix-darwin.lib.darwinSystem {
+          inherit system specialArgs;
+          pkgs = nixpkgsWithOverlays system;
+          modules =
+            [
+              (configurationDefaults specialArgs)
+              home-manager.darwinModules.home-manager {
+                home-manager.users.${username} = import ./home.nix;
+                users.users.${username}.home = "/Users/${username}";
+              }
             ]
             ++ modules;
         };
@@ -83,6 +128,28 @@
               roslyn-lsp.packages.x86_64-linux.roslynLanguageServer 
             ];
           })
+        ];
+      };
+
+      darwinConfigurations."Georges-MacBook-Pro" = mkDarwinConfiguration {
+        hostname = "Georges-MacBook-Pro";
+        username = "george";
+        modules = [
+          ./darwin.nix
+          nix-homebrew.darwinModules.nix-homebrew {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "george";
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/cask" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;
+            };
+          }
         ];
       };
     };
