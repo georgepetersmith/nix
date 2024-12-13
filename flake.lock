@@ -300,22 +300,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1732014248,
-        "narHash": "sha256-y/MEyuJ5oBWrWAic/14LaIr/u5E0wRVzyYsouYY3W6w=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "23e89b7da85c3640bbc2173fe04f4bd114342367",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -327,23 +311,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgs-unstable": "nixpkgs-unstable",
-        "roslyn-lsp": "roslyn-lsp"
-      }
-    },
-    "roslyn-lsp": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_4"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-UiXiyL7ZMXLKg03wWVDfhroMxxZkjP/QYCEKoBIWucI=",
-        "path": "./roslyn-lsp",
-        "type": "path"
-      },
-      "original": {
-        "path": "./roslyn-lsp",
-        "type": "path"
+        "nixpkgs-unstable": "nixpkgs-unstable"
       }
     },
     "systems": {
