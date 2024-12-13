@@ -13,8 +13,6 @@
   inputs.nix-index-database.url = "github:Mic92/nix-index-database";
   inputs.nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-  inputs.roslyn-lsp.url = "path:./roslyn-lsp";
-
   inputs.nix-darwin.url = "github:LnL7/nix-darwin";
   inputs.nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -123,11 +121,6 @@
           nixos-wsl.nixosModules.wsl
           ./wsl.nix
           ./podman.nix
-          ({ pkgs, ... }: {
-            environment.systemPackages = [ 
-              roslyn-lsp.packages.x86_64-linux.roslynLanguageServer 
-            ];
-          })
         ];
       };
 

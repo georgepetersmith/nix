@@ -3,7 +3,7 @@ return {
   dependencies = {
     {'hrsh7th/cmp-nvim-lsp'},
     {'hrsh7th/nvim-cmp'},
-    {'seblj/roslyn.nvim'}
+    {'seblj/roslyn.nvim', ft = 'cs'}
   },
   config = function()
 
@@ -42,6 +42,7 @@ return {
     lspconfig.jsonls.setup({})
     lspconfig.astro.setup({})
     lspconfig.marksman.setup({})
+    lspconfig.gopls.setup({})
 
     require'roslyn'.setup({
       exe = "roslyn-language-server"
