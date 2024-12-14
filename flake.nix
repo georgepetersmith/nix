@@ -32,6 +32,9 @@
     flake = false;
   };
 
+  inputs.neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+  inputs.neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs = inputs:
     with inputs; let
 
@@ -49,6 +52,7 @@
               inherit config;
             };
           })
+          neovim-nightly-overlay.overlays.default
         ];
       });
 

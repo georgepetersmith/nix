@@ -1,19 +1,23 @@
 return {
   'neovim/nvim-lspconfig',
   dependencies = {
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/nvim-cmp'},
-    {'seblj/roslyn.nvim', ft = 'cs'}
+    {'seblj/roslyn.nvim', ft = 'cs'},
+    {
+      'saghen/blink.cmp',
+      lazy = false,
+      dependencies = 'rafamadriz/friendly-snippets',
+      version = 'v0.*',
+    }
   },
   config = function()
 
-    local lspconfig = require'lspconfig'
-    local lspconfig_defaults = lspconfig.util.default_config
-    lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-      'force',
-      lspconfig_defaults.capabilities,
-      require('cmp_nvim_lsp').default_capabilities()
-    )
+    local lspconfig = require('lspconfig')
+    for server, config in pairs(opts.servers) do
+      -- passing config.capabilities to blink.cmp merges with the capabilities in your
+      -- `opts[server].capabilities, if you've defined it
+      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+      lspconfig[server].setup(config)
+    end
 
     vim.api.nvim_create_autocmd('LspAttach', {
       desc = 'LSP actions',
@@ -48,18 +52,5 @@ return {
       exe = "roslyn-language-server"
     })
 
-    local cmp = require('cmp')
-
-    cmp.setup({
-      sources = {
-        {name = 'nvim_lsp'},
-      },
-      snippet = {
-        expand = function(args)
-          vim.snippet.expand(args.body)
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({}),
-    })
   end
 }

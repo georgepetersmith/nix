@@ -24,8 +24,16 @@
 
   homebrew = {
     enable = true;
-    brews = [ "mas" ];
-    casks = [ "raycast" ];
+    brews = [
+      "mas"
+    ];
+    casks = [
+      "raycast"
+      "discord"
+    ];
+    masApps = {
+      "Windows" = 1295203466;
+    };
     onActivation.cleanup = "zap";
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;

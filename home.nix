@@ -22,7 +22,6 @@
     tmux
     tree
     unzip
-    neovim
     wget
     zip
     lazygit
@@ -42,6 +41,7 @@
   ];
 
   stable-packages = with pkgs; [
+    neovim
     gh
     just
     mkcert
