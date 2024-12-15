@@ -7,19 +7,38 @@ return {
       lazy = false,
       dependencies = 'rafamadriz/friendly-snippets',
       version = 'v0.*',
-      opts = { appearance = { nerd_font_variant = 'normal' } },
+      opts = {
+        appearance = {
+          use_nvim_cmp_as_default = true,
+          nerd_font_variant = 'normal'
+        },
+        sources = {
+          completion = {
+            enabled_providers = { "lsp", "path", "snippets", "buffer" },
+          },
+          providers = {
+            snippets = {
+              min_keyword_length = 1, -- don't show when triggered manually, useful for JSON keys
+              score_offset = -1,
+            },
+            path = {
+              opts = { get_cwd = vim.uv.cwd },
+            },
+            buffer = {
+              fallback_for = {}, -- disable being fallback for LSP
+              max_items = 4,
+              min_keyword_length = 4,
+              score_offset = -3,
+            },
+          },
+        },
+      },
     },
   },
   opts = {
     servers = {
+      lua_ls = {},
       gopls = {},
-      rust_analyzer = {},
-      ts_ls = {},
-      yamlls = {},
-      tailwindcss = {},
-      jsonls = {},
-      astro = {},
-      marksman = {},
     }
   },
   config = function(_, opts)
@@ -48,6 +67,15 @@ return {
         vim.keymap.set('n', 'gh', '<cmd>lua vim.diagnostic.open_float()<cr>')
       end,
     })
+
+    lspconfig.rust_analyzer.setup({})
+    lspconfig.ts_ls.setup({})
+    lspconfig.bashls.setup({})
+    lspconfig.yamlls.setup({})
+    lspconfig.tailwindcss.setup({})
+    lspconfig.jsonls.setup({})
+    lspconfig.astro.setup({})
+    lspconfig.marksman.setup({})
 
     require'roslyn'.setup({
       exe = "roslyn-language-server"

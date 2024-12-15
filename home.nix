@@ -37,6 +37,7 @@
     nodePackages_latest.vscode-json-languageserver
     astro-language-server
     marksman
+    gopls
     nerd-fonts.jetbrains-mono
   ];
 
