@@ -13,7 +13,7 @@ return {
   opts = {
     servers = {
       gopls = {},
-      rust_analyzer = {},
+      -- rust_analyzer = {},
       ts_ls = {},
       yamlls = {},
       tailwindcss = {},

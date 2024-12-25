@@ -39,9 +39,6 @@ vim.opt.showmode = false
 vim.opt.belloff = 'all'
 vim.cmd('filetype plugin on')
 
-vim.cmd("colorscheme retrobox")
-vim.o.background = 'dark'
-
 local has = function(x)
   return vim.fn.has(x) == 1
 end
@@ -86,7 +83,15 @@ require('lazy').setup({
   checker = { enabled = false }
 })
 
-
 if vim.g.neovide then
   vim.o.guifont = "JetbrainsMono Nerd Font:h10" -- text below applies for VimScript
 end
+
+vim.o.background = 'dark'
+local status_ok, err = pcall(function()
+    vim.cmd.colorscheme("catppuccin-mocha")
+end)
+if not status_ok then
+    vim.cmd.colorscheme("default")
+end
+

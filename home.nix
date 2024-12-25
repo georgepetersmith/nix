@@ -35,10 +35,15 @@
     yaml-language-server
     tailwindcss-language-server
     nodePackages_latest.vscode-json-languageserver
+    vscode-extensions.vadimcn.vscode-lldb.adapter
     astro-language-server
     marksman
     gopls
     nerd-fonts.jetbrains-mono
+    go
+    cargo
+    rustc
+    rustfmt
   ];
 
   stable-packages = with pkgs; [
