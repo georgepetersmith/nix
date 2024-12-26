@@ -29,7 +29,6 @@
     lazysql
     nodejs_20
     podman
-    rust-analyzer
     typescript-language-server
     bash-language-server
     yaml-language-server
@@ -41,9 +40,6 @@
     gopls
     nerd-fonts.jetbrains-mono
     go
-    cargo
-    rustc
-    rustfmt
   ];
 
   stable-packages = with pkgs; [
