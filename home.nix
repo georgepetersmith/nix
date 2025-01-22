@@ -40,6 +40,9 @@
     gopls
     nerd-fonts.jetbrains-mono
     go
+    helix
+    skim
+    neovide
   ];
 
   stable-packages = with pkgs; [
@@ -62,8 +65,9 @@
     home = {
       username = "${username}";
 
-      sessionVariables.EDITOR = "nvim";
+      sessionVariables.EDITOR = "hx";
       sessionVariables.SHELL = "/etc/profiles/per-user/${username}/bin/bash";
+      sessionVariables.COLORTERM = "truecolor";
     };
 
     home.packages =

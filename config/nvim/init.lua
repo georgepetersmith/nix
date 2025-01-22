@@ -4,7 +4,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.title = true
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.path:append { '**' }
 vim.opt.syntax = 'ON'

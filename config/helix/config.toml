@@ -1,0 +1,10 @@
+theme = "catppuccin_mocha"
+
+[editor]
+mouse = false
+preview-completion-insert = false
+true-color = true
+insert-final-newline = false
+
+[editor.file-picker]
+hidden = false
