@@ -18,6 +18,8 @@
 
   inputs.nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
+  inputs.nvim-config.url = "github:georgepetersmith/nvim";
+
   # Optional: Declarative tap management
   inputs.homebrew-core = {
     url = "github:homebrew/homebrew-core";
@@ -64,7 +66,7 @@
       };
 
       argDefaults = {
-        inherit inputs self nix-index-database;
+        inherit self inputs nix-index-database nvim-config;
         channels = {
           inherit nixpkgs nixpkgs-unstable;
         };

@@ -2,6 +2,7 @@
     pkgs,
     username,
     nix-index-database,
+    nvim-config,
     ...
 }: let
   unstable-packages = with pkgs.unstable; [
@@ -58,6 +59,7 @@
   in {
     imports = [
       nix-index-database.hmModules.nix-index
+      nvim-config.homeManagerModules.default
     ];
 
     home.stateVersion = "24.11";
@@ -155,8 +157,8 @@
     };
 
     xdg.configFile = {
-      nvim = {
-        source = config/nvim;
+      "." = {
+        source = ./config;
         recursive = true;
       };
     };
