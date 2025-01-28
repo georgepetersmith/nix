@@ -37,13 +37,19 @@
     nodePackages_latest.vscode-json-languageserver
     vscode-extensions.vadimcn.vscode-lldb.adapter
     astro-language-server
+    roslyn-ls
     marksman
     gopls
+    rust-analyzer
     nerd-fonts.jetbrains-mono
     go
     helix
     skim
     neovide
+    cargo
+    cargo-watch
+    rustfmt
+    rustc
   ];
 
   stable-packages = with pkgs; [
