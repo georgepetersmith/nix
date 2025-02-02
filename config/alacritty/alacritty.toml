@@ -1,3 +1,7 @@
+import = [
+  "~/.config/alacritty/catppuccin-latte.toml"
+]
+
 shell = "/etc/profiles/per-user/george/bin/bash"
 
 [font]

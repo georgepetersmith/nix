@@ -34,9 +34,6 @@
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
-
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
 
@@ -57,7 +54,6 @@
               inherit config;
             };
           })
-          neovim-nightly-overlay.overlays.default
         ];
       });
 
