@@ -1,10 +1,13 @@
-theme = "catppuccin_mocha"
+theme = "catppuccin_latte"
 
 [editor]
 mouse = false
 preview-completion-insert = false
 true-color = true
 insert-final-newline = false
+end-of-line-diagnostics = "hint"
+scroll-lines = 8
+cursorline = true
 
 [editor.file-picker]
 hidden = false
